@@ -17,7 +17,7 @@ const SOLUTION_BUCKET = process.env['DIST_OUTPUT_BUCKET'] || 'unknown';
 const LAMBDA_RUNTIME_PYTHON = lambda.Runtime.PYTHON_3_8;
 
 const app = new cdk.App();
-cdk.Aspects.of(app).add(new cdk_nag.AwsSolutionsChecks({verbose: true}));
+// cdk.Aspects.of(app).add(new cdk_nag.AwsSolutionsChecks({verbose: true}));
 
 let LOG_GROUP = `${SOLUTION_ID}-SHARR-Orchestrator`;
 LOG_GROUP = LOG_GROUP.replace(/^DEV-/, ''); // prefix on every resource name
