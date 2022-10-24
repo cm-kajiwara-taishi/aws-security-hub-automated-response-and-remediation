@@ -47,6 +47,21 @@ mainSteps:
       - Name: DbInstanceIdentifier
         Selector: $.DBInstances[0].DBInstanceIdentifier
         Type: String
+  - 
+    name: WaitForDBInstanceStatusToAvailable
+    action: "aws:waitForAwsResourceProperty"
+    timeoutSeconds: 1200
+    isEnd: false
+    description: |
+      ## WaitForDBInstanceStatusToAvailable
+      Waits for the DB instance to change to a AVAILABLE state.
+    inputs:
+      Service: rds
+      Api: DescribeDBInstances
+      DBInstanceIdentifier: "{{ GetRDSInstanceIdentifier.DbInstanceIdentifier }}"
+      PropertySelector: "$.DBInstances[0].DBInstanceStatus"
+      DesiredValues:
+        - "available"
   -
     name: VerifyDBInstanceStatus
     action: "aws:assertAwsResourceProperty"
